@@ -1,0 +1,166 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    function getUserRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+    function isAdmin() {
+      return isAuthenticated() && getUserRole() == 'admin';
+    }
+    function isPartner() {
+      return isAuthenticated() && getUserRole() == 'partner';
+    }
+    function isCustomer() {
+      return isAuthenticated() && getUserRole() == 'customer';
+    }
+
+    // Public Collections: Services & Categories
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /offers/{offerId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Platform Settings
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow delete: if isAdmin();
+
+      // Customer subcollection: addresses
+      match /addresses/{addressId} {
+        allow read, write: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      }
+    }
+
+    // Customer Profiles
+    match /customers/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+    }
+
+    // Partner Profiles
+    match /partners/{partnerId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.auth.uid == partnerId;
+      allow update: if isAuthenticated() && (
+        isAdmin() || 
+        (request.auth.uid == partnerId && 
+         !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+           'kycStatus', 'accountStatus', 'rating', 'totalRatings', 
+           'totalCompletedJobs', 'totalEarnings', 'isEligibleForBooking'
+         ]))
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Partner KYC
+    match /partnerKyc/{partnerId} {
+      allow read: if isAuthenticated() && (request.auth.uid == partnerId || isAdmin());
+      allow create, update: if isAuthenticated() && (request.auth.uid == partnerId || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Partner Availability
+    match /partnerAvailability/{partnerId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (request.auth.uid == partnerId || isAdmin());
+    }
+
+    // Partner Earnings
+    match /partnerEarnings/{earningId} {
+      allow read: if isAuthenticated() && (resource.data.partnerId == request.auth.uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    // Bookings Collection
+    match /bookings/{bookingId} {
+      allow read: if isAuthenticated() && (
+        resource.data.customerId == request.auth.uid || 
+        resource.data.partnerId == request.auth.uid || 
+        resource.data.status == 'SEARCHING_PARTNER' ||
+        !('partnerId' in resource.data) ||
+        isAdmin()
+      );
+      allow create: if isAuthenticated() && isCustomer();
+      allow update: if isAuthenticated() && (
+        resource.data.customerId == request.auth.uid || 
+        resource.data.partnerId == request.auth.uid || 
+        (resource.data.status == 'SEARCHING_PARTNER' && isPartner()) ||
+        isAdmin()
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Payments Collection
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() && (
+        resource.data.customerId == request.auth.uid || 
+        isAdmin()
+      );
+      allow create, update: if isAuthenticated();
+      allow delete: if isAdmin();
+    }
+
+    // Refunds
+    match /refunds/{refundId} {
+      allow read: if isAuthenticated() && (
+        resource.data.customerId == request.auth.uid || 
+        isAdmin()
+      );
+      allow write: if isAdmin();
+    }
+
+    // Reviews
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && request.resource.data.customerId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    // Complaints
+    match /complaints/{complaintId} {
+      allow read: if isAuthenticated() && (
+        resource.data.createdBy == request.auth.uid || 
+        isAdmin()
+      );
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+
+    // Notifications
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if isAuthenticated();
+    }
+
+    // Admin Logs
+    match /adminLogs/{logId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

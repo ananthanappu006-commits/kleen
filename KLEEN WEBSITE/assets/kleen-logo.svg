@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="logo-emerald-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="50%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+    <linearGradient id="logo-gold-acc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="logo-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Left Icon Emblem -->
+  <g transform="translate(6, 6) scale(0.5)">
+    <rect x="15" y="15" width="90" height="90" rx="26" fill="url(#logo-emerald-grad)" filter="url(#logo-shadow)" />
+    <rect x="17" y="17" width="86" height="86" rx="24" stroke="#34D399" stroke-width="1.5" stroke-opacity="0.4" />
+    <path d="M42 34 V86" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+    <path d="M78 36 L46 60" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+    <path d="M54 54 L78 84" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+    <path d="M84 28 L86.5 35.5 L94 38 L86.5 40.5 L84 48 L81.5 40.5 L74 38 L81.5 35.5 Z" fill="url(#logo-gold-acc)" />
+  </g>
+
+  <!-- Brand Name Typography -->
+  <g transform="translate(76, 42)">
+    <text font-family="Outfit, Inter, system-ui, -apple-system, sans-serif" font-weight="900" font-size="34" letter-spacing="0.08em" fill="#09281E">
+      KLEEN
+    </text>
+    <circle cx="128" cy="-22" r="3" fill="#10B981" />
+  </g>
+
+  <!-- Tagline Subtitle -->
+  <g transform="translate(78, 58)">
+    <text font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="7.5" letter-spacing="0.22em" fill="#059669" text-transform="uppercase">
+      HOME CARE &amp; MAID SPECIALISTS
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="shield-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="check-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#ECFDF5" />
+    </linearGradient>
+    <filter id="shield-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#10B981" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Shield Base -->
+  <path d="M50 12 L82 24 V50 C82 72 50 88 50 88 C50 88 18 72 18 50 V24 L50 12 Z" fill="url(#shield-grad)" filter="url(#shield-glow)" />
+  
+  <!-- Subtle Inset Shield Outline -->
+  <path d="M50 17 L78 27 V50 C78 68 50 82 50 82 C50 82 22 68 22 50 V27 L50 17 Z" stroke="#6EE7B7" stroke-width="1.5" stroke-opacity="0.5" />
+
+  <!-- Verification Checkmark -->
+  <path d="M36 50 L46 60 L65 38" stroke="url(#check-grad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

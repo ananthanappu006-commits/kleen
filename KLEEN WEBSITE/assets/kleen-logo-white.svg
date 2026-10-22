@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="logo-white-emerald-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="50%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="logo-white-gold-acc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Icon Emblem -->
+  <g transform="translate(6, 6) scale(0.5)">
+    <rect x="15" y="15" width="90" height="90" rx="26" fill="url(#logo-white-emerald-grad)" />
+    <rect x="17" y="17" width="86" height="86" rx="24" stroke="#A7F3D0" stroke-width="1.5" stroke-opacity="0.6" />
+    <path d="M42 34 V86" stroke="#09281E" stroke-width="8" stroke-linecap="round" />
+    <path d="M78 36 L46 60" stroke="#09281E" stroke-width="8" stroke-linecap="round" />
+    <path d="M54 54 L78 84" stroke="#09281E" stroke-width="8" stroke-linecap="round" />
+    <path d="M84 28 L86.5 35.5 L94 38 L86.5 40.5 L84 48 L81.5 40.5 L74 38 L81.5 35.5 Z" fill="url(#logo-white-gold-acc)" />
+  </g>
+
+  <!-- Brand Name Typography (Crisp White) -->
+  <g transform="translate(76, 42)">
+    <text font-family="Outfit, Inter, system-ui, -apple-system, sans-serif" font-weight="900" font-size="34" letter-spacing="0.08em" fill="#FFFFFF">
+      KLEEN
+    </text>
+    <circle cx="128" cy="-22" r="3" fill="#34D399" />
+  </g>
+
+  <!-- Tagline Subtitle -->
+  <g transform="translate(78, 58)">
+    <text font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="7.5" letter-spacing="0.22em" fill="#A7F3D0" text-transform="uppercase">
+      HOME CARE &amp; MAID SPECIALISTS
+    </text>
+  </g>
+</svg>

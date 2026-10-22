@@ -1,0 +1,22 @@
+{
+  "name": "kleen-platform",
+  "version": "1.0.0",
+  "description": "KLEEN — Professional On-Demand Maid & Home-Care Booking Platform",
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "powershell -ExecutionPolicy Bypass -File .\\serve.ps1",
+    "serve": "powershell -ExecutionPolicy Bypass -File .\\serve.ps1",
+    "deploy": "firebase deploy"
+  },
+  "keywords": [
+    "maid-booking",
+    "home-cleaning",
+    "firebase",
+    "razorpay",
+    "kyc-verification",
+    "liquid-glass"
+  ],
+  "author": "KLEEN Technologies",
+  "license": "ISC"
+}

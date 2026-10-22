@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="kleen-emerald-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="50%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+    <linearGradient id="kleen-gold-acc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="kleen-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#064E3B" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Outer Rounded Diamond Shield -->
+  <rect x="15" y="15" width="90" height="90" rx="28" fill="url(#kleen-emerald-grad)" filter="url(#kleen-shadow)" />
+  
+  <!-- Subtle Inner Border -->
+  <rect x="17" y="17" width="86" height="86" rx="26" stroke="#34D399" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- Geometric Luxury Monogram 'K' & Sparkle -->
+  <!-- Stem -->
+  <path d="M42 34 V86" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- Upper Diagonal -->
+  <path d="M78 36 L46 60" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- Lower Diagonal -->
+  <path d="M54 54 L78 84" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- Accent Sparkle Star -->
+  <path d="M84 28 L86.5 35.5 L94 38 L86.5 40.5 L84 48 L81.5 40.5 L74 38 L81.5 35.5 Z" fill="url(#kleen-gold-acc)" />
+  <circle cx="84" cy="38" r="1.5" fill="#FFF" />
+</svg>

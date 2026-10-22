@@ -1,0 +1,34 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Public service images
+    match /serviceImages/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Profile images: viewable by authenticated users, editable by owner (<5MB, images only)
+    match /profileImages/{userId}/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isOwner(userId) &&
+        request.resource.size < 5 * 1024 * 1024 &&
+        request.resource.contentType.matches('image/.*');
+    }
+
+    // Sensitive partner KYC documents: strictly private to partner and admin (<5MB, images or PDF)
+    match /partnerKyc/{partnerId}/{allPaths=**} {
+      allow read: if isAuthenticated() && (request.auth.uid == partnerId || request.auth.token.role == 'admin');
+      allow write: if isAuthenticated() && (request.auth.uid == partnerId || request.auth.token.role == 'admin') &&
+        request.resource.size < 5 * 1024 * 1024 &&
+        (request.resource.contentType.matches('image/.*') || request.resource.contentType == 'application/pdf');
+    }
+  }
+}
